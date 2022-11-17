@@ -8,8 +8,8 @@ use Illuminate\Http\JsonResponse;
 
 class NotificationController extends Controller
 {
-    private $userEmailProviderRepository;
-    private $notificationRepository;
+    private UserEmailProviderRepositoryInterface $userEmailProviderRepository;
+    private NotificationRepositoryInterface $notificationRepository;
 
     public function __construct(
         UserEmailProviderRepositoryInterface $userEmailProviderRepository,
@@ -20,7 +20,7 @@ class NotificationController extends Controller
         $this->notificationRepository = $notificationRepository;
     }
 
-    public function getUnreadNotificationsForUser()
+    public function getUnreadNotificationsForUser(): JsonResponse
     {
         $userId = auth('user_api')->user()->id;
         $providers = $this->userEmailProviderRepository->findByUserIdWithRelations($userId);
@@ -37,7 +37,7 @@ class NotificationController extends Controller
         return new JsonResponse($unreadNotifications);
     }
 
-    public function setNotificationToReadForUser()
+    public function setNotificationToReadForUser(): JsonResponse
     {
         $userId = auth('user_api')->user()->id;
         $providers = $this->userEmailProviderRepository->findByUserIdWithRelations($userId);
@@ -54,7 +54,7 @@ class NotificationController extends Controller
     }
 
 
-    public function getAllNotificationsForUser() {
+    public function getAllNotificationsForUser(): JsonResponse {
         $userId = auth('user_api')->user()->id;
         $providers = $this->userEmailProviderRepository->findByUserIdWithRelations($userId);
 

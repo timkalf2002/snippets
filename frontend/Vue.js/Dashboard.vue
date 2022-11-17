@@ -73,7 +73,7 @@ export default {
         this.$router.push({path: "/bin/" + res.data.id})
       });
     },
-    setCircle(isTrue, index, amountOfTrue) {
+    setCircle(isTrue, index) {
       if (isTrue && index === '') {
         return "bg-indigo-500 text-white"
       } else if (!isTrue && index === '') {
